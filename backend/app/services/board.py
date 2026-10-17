@@ -26,8 +26,8 @@ class BoardService:
     board: Board | None = db.query(Board).filter(Board.id == board_id).first()
     if not board:
       raise APIException(
-        status_code=404,
-        error_code=constants.err_code_board_not_found,
+        status_code=constants.ST_CODE_404_NOT_FOUND,
+        error_code=constants.ERR_CODE_BOARD_NOT_FOUND,
         message=f"Board with id {board_id} does not exist",
       )
     return board
@@ -40,8 +40,8 @@ class BoardService:
     task_count: int = db.query(Task).filter(Task.board_id == board.id).count()
     if task_count > 0:
       raise APIException(
-        status_code=400,
-        error_code=constants.err_code_board_not_empty,
+        status_code=constants.ST_CODE_400_BAD_REQUEST,
+        error_code=constants.ERR_CODE_BOARD_NOT_EMPTY,
         message="Unable to delete board with tasks",
       )
 
@@ -52,7 +52,7 @@ class BoardService:
       db.rollback()
 
       raise APIException(
-        status_code=400,
-        error_code=constants.err_code_delete_restricted,
+        status_code=constants.ST_CODE_400_BAD_REQUEST,
+        error_code=constants.ERR_CODE_DELETE_RESTRICTED,
         message="Unable to delete board with tasks",
       )

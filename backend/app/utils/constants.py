@@ -1,8 +1,15 @@
-task_statuses: set[str] = {"TODO", "IN_PROGRESS", "DONE"}
+TASK_STATUSES: set[str] = {"TODO", "IN_PROGRESS", "DONE"}
+
+# Status Codes
+ST_CODE_200_OK: int = 200
+ST_CODE_201_CREATED: int = 201
+ST_CODE_204_NO_CONTENT: int = 204
+ST_CODE_400_BAD_REQUEST: int = 400
+ST_CODE_404_NOT_FOUND: int = 404
 
 # Error Codes
-err_code_board_not_empty: str = "BOARD_NOT_EMPTY"
-err_code_board_not_found: str = "BOARD_NOT_FOUND"
-err_code_delete_restricted: str = "DELETE_RESTRICTED"
-err_code_invalid_status: str = "INVALID_STATUS"
-err_code_task_not_found: str = "TASK_NOT_FOUND"
+ERR_CODE_BOARD_NOT_EMPTY: str = "BOARD_NOT_EMPTY"
+ERR_CODE_BOARD_NOT_FOUND: str = "BOARD_NOT_FOUND"
+ERR_CODE_DELETE_RESTRICTED: str = "DELETE_RESTRICTED"
+ERR_CODE_INVALID_STATUS: str = "INVALID_STATUS"
+ERR_CODE_TASK_NOT_FOUND: str = "TASK_NOT_FOUND"

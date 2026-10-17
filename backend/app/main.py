@@ -4,6 +4,7 @@ from fastapi.responses import JSONResponse
 import uvicorn
 
 from app.configs.env import env
+from app.routers import boards, tasks
 from app.utils.exceptions import APIException
 
 app: FastAPI = FastAPI(
@@ -19,6 +20,9 @@ app.add_middleware(
   allow_methods=["*"],
   allow_headers=["*"],
 )
+
+app.include_router(boards.router)
+app.include_router(tasks.router)
 
 @app.exception_handler(APIException)
 async def exception_handler(

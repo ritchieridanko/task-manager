@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field, field_validator
 from typing import Optional
 from uuid import UUID
 
-from app.utils.constants import task_statuses
+from app.utils.constants import TASK_STATUSES
 
 class TaskCreate(BaseModel):
   title: str = Field(..., min_length=1, description="Task title is required")
@@ -24,8 +24,8 @@ class TaskCreate(BaseModel):
     if value is None:
       return "TODO"
     v: str = value.strip().upper()
-    if v not in task_statuses:
-      raise ValueError(f"Invalid status. Must be one of {list(task_statuses)}")
+    if v not in TASK_STATUSES:
+      raise ValueError(f"Invalid status. Must be one of {list(TASK_STATUSES)}")
     return v
 
 class TaskUpdate(BaseModel):
@@ -48,8 +48,8 @@ class TaskUpdate(BaseModel):
   def validate_status(cls, value: Optional[str]) -> Optional[str]:
     if value is not None:
       v: str = value.strip().upper()
-      if v not in task_statuses:
-        raise ValueError(f"Invalid status. Must be one of {list(task_statuses)}")
+      if v not in TASK_STATUSES:
+        raise ValueError(f"Invalid status. Must be one of {list(TASK_STATUSES)}")
       return v
     return value
 

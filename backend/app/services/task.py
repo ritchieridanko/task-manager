@@ -7,7 +7,7 @@ from app.models.task import Task
 from app.schemas.task import TaskCreate, TaskUpdate
 from app.services.board import BoardService
 from app.utils import constants
-from app.utils.constants import task_statuses
+from app.utils.constants import TASK_STATUSES
 from app.utils.exceptions import APIException
 
 class TaskService:
@@ -37,11 +37,11 @@ class TaskService:
 
     if status:
       s: str = status.strip().upper()
-      if s not in task_statuses:
+      if s not in TASK_STATUSES:
         raise APIException(
-          status_code=400,
-          error_code=constants.err_code_invalid_status,
-          message=f"Invalid status. Must be one of {list(task_statuses)}",
+          status_code=constants.ST_CODE_400_BAD_REQUEST,
+          error_code=constants.ERR_CODE_INVALID_STATUS,
+          message=f"Invalid status. Must be one of {list(TASK_STATUSES)}",
         )
 
       query = query.filter(Task.status == s)
@@ -53,8 +53,8 @@ class TaskService:
     task: Task | None = db.query(Task).filter(Task.id == task_id).first()
     if not task:
       raise APIException(
-        status_code=404,
-        error_code=constants.err_code_task_not_found,
+        status_code=constants.ST_CODE_404_NOT_FOUND,
+        error_code=constants.ERR_CODE_TASK_NOT_FOUND,
         message=f"Task with id {task_id} does not exist",
       )
 
@@ -74,8 +74,8 @@ class TaskService:
     task: Task | None = db.query(Task).filter(Task.id == task_id).first()
     if not task:
       raise APIException(
-        status_code=404,
-        error_code=constants.err_code_task_not_found,
+        status_code=constants.ST_CODE_404_NOT_FOUND,
+        error_code=constants.ERR_CODE_TASK_NOT_FOUND,
         message=f"Task with id {task_id} does not exist",
       )
 
