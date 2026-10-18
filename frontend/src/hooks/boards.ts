@@ -98,3 +98,42 @@ export const useCreateBoard = () => {
 
   return { loading, createBoard };
 };
+
+export const useDeleteBoard = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const deleteBoard = useCallback(async (id: string) => {
+    setLoading(true);
+
+    try {
+      await boardApi.delete(id);
+    } catch (err: unknown) {
+      let message: string = "Something went wrong";
+
+      if (axios.isAxiosError(err)) {
+        message = err.response?.data?.message || err.message;
+      } else if (err instanceof Error) {
+        message = err.message;
+      } else {
+        console.log(err);
+      }
+
+      toast.error(message, {
+        id: "db-err-toast",
+        duration: 5000,
+        style: {
+          background: COLORS.ERROR,
+          color: COLORS.LIGHT,
+        },
+        iconTheme: {
+          primary: COLORS.LIGHT,
+          secondary: COLORS.ERROR,
+        },
+      });
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  return { loading, deleteBoard };
+};
