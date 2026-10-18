@@ -14,7 +14,7 @@ task-manager/
 
 ## Quick Start (Docker Compose)
 
-The easiest way to run the entire application locally is by using the provided Docker Compose orchestration.
+The easiest way to run the entire application locally is by using the provided Docker Compose orchestration. Before building and running the application, make sure to create .env file at both `backend/` and `frontend/` with their values copied from each respective .env.example.
 
 With Makefile:
 

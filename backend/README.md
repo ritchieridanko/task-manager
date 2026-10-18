@@ -35,7 +35,7 @@ To run the service locally with virtual environment, follow the instructions bel
    pip install -r requirements.txt
    ```
 
-4. Configure the .env file at /backend by copying everything from .env.example, and adjust accordingly.
+4. Configure the .env file at `backend/` by copying everything from .env.example, and adjust accordingly.
 
 5. Run database migrations: (Make sure PostgreSQL is running)
 

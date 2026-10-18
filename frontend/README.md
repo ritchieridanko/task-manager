@@ -27,7 +27,7 @@ To run the service locally, follow the instructions below:
    npm install
    ```
 
-3. Configure the .env file at /frontend by copying everything from .env.example, and adjust accordingly.
+3. Configure the .env file at `frontend/` by copying everything from .env.example, and adjust accordingly.
 
 4. Start the development server:
 
