@@ -23,7 +23,7 @@ const ListItem: React.FC<ListItemProps> = ({
     >
       <span
         className={`
-          font-sans text-base
+          font-sans text-base truncate
           ${isSelected ? "font-semibold text-white" : "font-normal text-blue-800"}
         `}
       >
