@@ -1,5 +1,10 @@
 import { useFetchAllBoards, useCreateBoard, useDeleteBoard } from "./boards";
-import { useFetchAllTasks, useCreateTask, useUpdateTask } from "./tasks";
+import {
+  useFetchAllTasks,
+  useCreateTask,
+  useDeleteTask,
+  useUpdateTask,
+} from "./tasks";
 
 export {
   useFetchAllBoards,
@@ -7,5 +12,6 @@ export {
   useCreateBoard,
   useCreateTask,
   useDeleteBoard,
+  useDeleteTask,
   useUpdateTask,
 };
