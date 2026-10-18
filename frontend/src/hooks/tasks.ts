@@ -4,7 +4,12 @@ import toast from "react-hot-toast";
 
 import { taskApi } from "../api";
 import { COLORS } from "../constants";
-import type { CreateTaskPayload, GetAllTasksParams, Task } from "../types";
+import type {
+  CreateTaskPayload,
+  GetAllTasksParams,
+  Task,
+  UpdateTaskPayload,
+} from "../types";
 
 export const useFetchAllTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -116,4 +121,60 @@ export const useCreateTask = () => {
   };
 
   return { form, setForm, clearForm, loading, createTask };
+};
+
+export const useUpdateTask = () => {
+  const [form, setForm] = useState<UpdateTaskPayload>({
+    title: undefined,
+    description: undefined,
+    status: undefined,
+  });
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const updateTask = useCallback(
+    async (id: string, payload: UpdateTaskPayload) => {
+      setLoading(true);
+
+      try {
+        const data: Task = await taskApi.update(id, payload);
+        return data;
+      } catch (err: unknown) {
+        let message: string = "Something went wrong";
+
+        if (axios.isAxiosError(err)) {
+          message = err.response?.data?.message || err.message;
+        } else if (err instanceof Error) {
+          message = err.message;
+        } else {
+          console.log(err);
+        }
+
+        toast.error(message, {
+          id: "ut-err-toast",
+          duration: 5000,
+          style: {
+            background: COLORS.ERROR,
+            color: COLORS.LIGHT,
+          },
+          iconTheme: {
+            primary: COLORS.LIGHT,
+            secondary: COLORS.ERROR,
+          },
+        });
+      } finally {
+        setLoading(false);
+      }
+    },
+    [],
+  );
+
+  const clearForm = () => {
+    setForm({
+      title: undefined,
+      description: undefined,
+      status: undefined,
+    });
+  };
+
+  return { form, setForm, clearForm, loading, updateTask };
 };
