@@ -1,3 +1,10 @@
 import { useFetchAllBoards, useCreateBoard, useDeleteBoard } from "./boards";
+import { useFetchAllTasks, useCreateTask } from "./tasks";
 
-export { useFetchAllBoards, useCreateBoard, useDeleteBoard };
+export {
+  useFetchAllBoards,
+  useFetchAllTasks,
+  useCreateBoard,
+  useCreateTask,
+  useDeleteBoard,
+};
