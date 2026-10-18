@@ -60,6 +60,9 @@ export const useFetchAllBoards = () => {
 };
 
 export const useCreateBoard = () => {
+  const [form, setForm] = useState<CreateBoardPayload>({
+    name: "",
+  });
   const [loading, setLoading] = useState<boolean>(false);
 
   const createBoard = useCallback(async (payload: CreateBoardPayload) => {
@@ -96,7 +99,11 @@ export const useCreateBoard = () => {
     }
   }, []);
 
-  return { loading, createBoard };
+  const clearForm = () => {
+    setForm({ name: "" });
+  };
+
+  return { form, setForm, clearForm, loading, createBoard };
 };
 
 export const useDeleteBoard = () => {
